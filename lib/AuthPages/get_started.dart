@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:clippy_flutter/paralellogram.dart';
 import 'package:flutter/material.dart';
+import 'package:know_your_medic/AuthPages/sign_in.dart';
 import 'package:know_your_medic/home_page.dart';
 
 class GetStarted extends StatefulWidget {
@@ -75,24 +76,23 @@ class _GetStartedState extends State<GetStarted> {
                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Quicksand-Bold',),                  
                   ),
                   SizedBox(height: 20,),
-                  Row(                    
-                    children: [
-                      FlatButton(
-                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage())),
-                        child: Text(
-                          'Next',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,                             
-                            fontWeight: FontWeight.bold
-                          ),
+                  Hero(
+                    tag: 'button',
+                    child: FlatButton(
+                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SignIn())),
+                      child: Text(
+                        'Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,                             
+                          fontWeight: FontWeight.bold
                         ),
-                        color: Theme.of(context).primaryColor,
-                        height: 45,
-                        minWidth: 100,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                       ),
-                    ],
+                      color: Theme.of(context).primaryColor,
+                      height: 45,
+                      minWidth: 100,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    ),
                   )
                 ],
               ),

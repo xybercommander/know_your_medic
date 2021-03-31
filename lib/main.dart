@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xffb12341),
         fontFamily: 'Quicksand',        
       ),
-      home: SignIn(),
+      home: GetStarted(),
     );
   }
 }
