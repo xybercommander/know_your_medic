@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_up.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -101,12 +102,15 @@ class _SignInState extends State<SignIn> {
                         borderRadius: BorderRadius.circular(15)
                       ),
                       child: Center(
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Quicksand-Bold',
-                            fontSize: 24
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Quicksand-Bold',
+                              fontSize: 24
+                            ),
                           ),
                         ),
                       ),
@@ -114,7 +118,10 @@ class _SignInState extends State<SignIn> {
                   ),
                   SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SignUp())),
+                    onTap: () => Navigator.pushReplacement(context, PageTransition(
+                        child: SignUp(),
+                        type: PageTransitionType.rightToLeftWithFade
+                    )),
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,
                       height: 55,

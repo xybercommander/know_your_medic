@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -131,7 +132,10 @@ class _SignUpState extends State<SignUp> {
                   ),
                   SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SignIn())),
+                    onTap: () => Navigator.pushReplacement(context, PageTransition(
+                        child: SignIn(),
+                        type: PageTransitionType.leftToRightWithFade
+                    )),
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,
                       height: 55,

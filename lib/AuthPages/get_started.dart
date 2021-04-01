@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
 import 'package:know_your_medic/AuthPages/sign_up.dart';
 import 'package:know_your_medic/home_page.dart';
+import 'package:page_transition/page_transition.dart';
 
 class GetStarted extends StatefulWidget {
   @override
@@ -80,7 +81,10 @@ class _GetStartedState extends State<GetStarted> {
                   Hero(
                     tag: 'button-red',
                     child: FlatButton(
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SignIn())),
+                      onPressed: () => Navigator.push(context, PageTransition(
+                        child: SignIn(),
+                        type: PageTransitionType.fade,                        
+                      )),
                       child: Text(
                         'Next',
                         style: TextStyle(
