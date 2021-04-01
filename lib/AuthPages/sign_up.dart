@@ -1,6 +1,13 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
-import 'package:know_your_medic/home_page.dart';
+import 'package:know_your_medic/helper/shared_preferences.dart';
+import 'package:know_your_medic/services/database.dart';
+import 'package:know_your_medic/views/home_page.dart';
+import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/services/auth.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -14,24 +21,75 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _nameTextEditingController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _passwordTextEditingController = TextEditingController();
-  bool showPassword = false;
+
+  bool showPassword = false;  
+  final picker = ImagePicker();
+  File _image;
+  String imgUrl = '';
 
   AuthMethods authMethods = AuthMethods();
+  DatabaseMethods databaseMethods = DatabaseMethods();
 
   // --------------SIGN UP METHOD-------------- //
   _signUp() async {
     if(_formKey.currentState.validate()) {
+      if(_image != null) {
+        await uploadPic();
+      }
+
+      Map<String, dynamic> userInfo = {
+        'name': _nameTextEditingController.text,
+        'email': _emailTextEditingController.text,
+      };
+
+      SharedPref.saveNameSharedPreference(_nameTextEditingController.text);
+      SharedPref.saveEmailSharedPreference(_emailTextEditingController.text);
+      if(_image != null) SharedPref.saveImgSharedPreference(_image.path.toString());
+      SharedPref.saveLoggedInSharedPreference(true);      
 
       authMethods.signUpWithEmailAndPassword(_emailTextEditingController.text, _passwordTextEditingController.text)
         .then((_) {
+          UserConstants.email = _emailTextEditingController.text;
+          UserConstants.name = _nameTextEditingController.text;
+          UserConstants.userImg = _image;
+
+          databaseMethods.uploadUserInfo(userInfo);
+
           Navigator.pushReplacement(context, PageTransition(
-            child: HomePage(),
+            child: HomePage(isLoggedIn: true,),
             type: PageTransitionType.rightToLeftWithFade
           ));
         });
 
     }
   }
+
+
+  // -----------IMAGE PICKER METHOD----------- //
+  Future getImage() async {
+    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if(pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        Fluttertoast.showToast(
+            msg: 'No Image Picked!',
+            textColor: Colors.white,
+            backgroundColor: Color.fromRGBO(253, 170, 142, 1));
+      }      
+    });
+  }
+
+  // ----------UPLOADING THE IMAGE IN FIREBASE STORAGE---------- //
+  Future uploadPic() async {
+    final file = _image;
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference reference = storage.ref().child(file.path);
+    await reference.putFile(file);
+    imgUrl = await reference.getDownloadURL();
+  }
+
+
 
 
   @override
@@ -66,14 +124,17 @@ class _SignUpState extends State<SignUp> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/noImg.png'),
+                  backgroundImage: _image == null ? 
+                      AssetImage('assets/images/noImg.png') :
+                      FileImage(_image),
                   backgroundColor: Colors.transparent,
                   radius: 50,
                 ),
                 // ignore: deprecated_member_use
-                FlatButton(
-                  // TODO: Implement pickImage package
-                  onPressed: () => print('adding image'),
+                FlatButton(                  
+                  onPressed: () async {
+                    await getImage();
+                  },
                   child: Text(
                     'Add Image',
                     style: TextStyle(
@@ -89,10 +150,13 @@ class _SignUpState extends State<SignUp> {
                 ),
               ],
             ),
+            SizedBox(height: 10,),
             Form(
               key: _formKey,
               child: Column(
                 children: [
+
+                  // ---------NAME FIELD--------- //
                   Container(   
                     padding: EdgeInsets.symmetric(horizontal: 16),                   
                     height: 50,
@@ -112,6 +176,8 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   SizedBox(height: 20,),
+
+                  // ---------EMAIL FIELD--------- //
                   Container(   
                     padding: EdgeInsets.symmetric(horizontal: 16),                   
                     height: 50,
@@ -131,6 +197,8 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   SizedBox(height: 20,),
+
+                  // ---------PASSWORD FIELD--------- //
                   Container(                  
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2), 
                     height: 50,    
@@ -160,10 +228,14 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   SizedBox(height: 40,),
+
                   Hero(
                     tag: 'button-red',
                     child: GestureDetector(
-                      onTap: () => _signUp,
+                      onTap: () {
+                        _signUp();
+                        print('Signing up');
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 40,
                         height: 55,

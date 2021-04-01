@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:know_your_medic/AuthPages/auth_checker.dart';
 import 'package:know_your_medic/AuthPages/sign_up.dart';
-import 'package:know_your_medic/home_page.dart';
+import 'package:know_your_medic/services/database.dart';
+import 'package:know_your_medic/views/home_page.dart';
 import 'package:know_your_medic/services/auth.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -13,17 +16,26 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _passwordTextEditingController = TextEditingController();
+
   bool showPassword = false;
+  Stream<QuerySnapshot> userStream;
 
   AuthMethods authMethods = AuthMethods();
+  DatabaseMethods databaseMethods = DatabaseMethods();
+
+  onLogin() async {
+    userStream = await databaseMethods.getUserInfoByEmail(_emailTextEditingController.text);
+  }
 
 
   _signIn() async {
+    await onLogin();
+
     authMethods.signInWithEmailAndPassword(_emailTextEditingController.text, _passwordTextEditingController.text)
       .then((_) {
         Navigator.pushReplacement(
           context, 
-          PageTransition(child: HomePage(), type: PageTransitionType.rightToLeftWithFade)
+          PageTransition(child: AuthChecker(userStream), type: PageTransitionType.rightToLeftWithFade)
         );
       });
   }
@@ -60,6 +72,8 @@ class _SignInState extends State<SignIn> {
               key: _formKey,
               child: Column(
                 children: [
+
+                  // ---------EMAIL FIELD--------- //
                   Container(   
                     padding: EdgeInsets.symmetric(horizontal: 16),                   
                     height: 50,
@@ -79,6 +93,8 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   SizedBox(height: 20,),
+
+                  // ---------PASSWORD FIELD--------- //
                   Container(                  
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2), 
                     height: 50,    
