@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
+import 'package:know_your_medic/home_page.dart';
+import 'package:know_your_medic/services/auth.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignUp extends StatefulWidget {
@@ -13,6 +15,24 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _passwordTextEditingController = TextEditingController();
   bool showPassword = false;
+
+  AuthMethods authMethods = AuthMethods();
+
+  // --------------SIGN UP METHOD-------------- //
+  _signUp() async {
+    if(_formKey.currentState.validate()) {
+
+      authMethods.signUpWithEmailAndPassword(_emailTextEditingController.text, _passwordTextEditingController.text)
+        .then((_) {
+          Navigator.pushReplacement(context, PageTransition(
+            child: HomePage(),
+            type: PageTransitionType.rightToLeftWithFade
+          ));
+        });
+
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -142,22 +162,25 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(height: 40,),
                   Hero(
                     tag: 'button-red',
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Center(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Quicksand-Bold',
-                              fontSize: 24
+                    child: GestureDetector(
+                      onTap: () => _signUp,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 40,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+                        child: Center(
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Quicksand-Bold',
+                                fontSize: 24
+                              ),
                             ),
                           ),
                         ),

@@ -80,7 +80,7 @@ class _GetStartedState extends State<GetStarted> {
                     tag: 'button-red',
                     // ignore: deprecated_member_use
                     child: FlatButton(
-                      onPressed: () => Navigator.push(context, PageTransition(
+                      onPressed: () => Navigator.pushReplacement(context, PageTransition(
                         child: SignIn(),
                         type: PageTransitionType.fade,                        
                       )),

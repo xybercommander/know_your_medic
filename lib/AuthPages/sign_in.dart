@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_up.dart';
+import 'package:know_your_medic/home_page.dart';
+import 'package:know_your_medic/services/auth.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignIn extends StatefulWidget {
@@ -12,6 +14,20 @@ class _SignInState extends State<SignIn> {
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _passwordTextEditingController = TextEditingController();
   bool showPassword = false;
+
+  AuthMethods authMethods = AuthMethods();
+
+
+  _signIn() async {
+    authMethods.signInWithEmailAndPassword(_emailTextEditingController.text, _passwordTextEditingController.text)
+      .then((_) {
+        Navigator.pushReplacement(
+          context, 
+          PageTransition(child: HomePage(), type: PageTransitionType.rightToLeftWithFade)
+        );
+      });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,22 +110,28 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 40,),
                   Hero(
                     tag: 'button-red',
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Center(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Quicksand-Bold',
-                              fontSize: 24
+                    child: GestureDetector(
+                      onTap: () {
+                        _signIn();
+                        print('Signing in');
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 40,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+                        child: Center(
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Quicksand-Bold',
+                                fontSize: 24
+                              ),
                             ),
                           ),
                         ),
