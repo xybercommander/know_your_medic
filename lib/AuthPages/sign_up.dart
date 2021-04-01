@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:know_your_medic/AuthPages/sign_up.dart';
+import 'package:know_your_medic/AuthPages/sign_in.dart';
 
-class SignIn extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _nameTextEditingController = TextEditingController();
   TextEditingController _emailTextEditingController = TextEditingController();
   TextEditingController _passwordTextEditingController = TextEditingController();
   bool showPassword = false;
@@ -23,7 +24,7 @@ class _SignInState extends State<SignIn> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              'Hey!\nWelcome back!',
+              'Hi!\nLet\'s get Started!',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 40,
@@ -31,7 +32,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             Text(
-              'Login to your account',
+              'Create an account',
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 18,
@@ -43,6 +44,25 @@ class _SignInState extends State<SignIn> {
               key: _formKey,
               child: Column(
                 children: [
+                  Container(   
+                    padding: EdgeInsets.symmetric(horizontal: 16),                   
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: TextFormField(
+                      controller: _nameTextEditingController,
+                      style: TextStyle(fontFamily: 'Quicksand-SemiBold', color: Colors.grey[800]),
+                      cursorColor: Colors.grey,
+                      decoration: InputDecoration(
+                        hintText: 'Name',
+                        hintStyle: TextStyle(fontFamily: 'Quicksand-SemiBold', color: Colors.grey[400]),                          
+                        border: InputBorder.none
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20,),
                   Container(   
                     padding: EdgeInsets.symmetric(horizontal: 16),                   
                     height: 50,
@@ -91,30 +111,27 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   SizedBox(height: 40,),
-                  Hero(
-                    tag: 'button-red',
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Quicksand-Bold',
-                            fontSize: 24
-                          ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 40,
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Quicksand-Bold',
+                          fontSize: 24
                         ),
                       ),
                     ),
                   ),
                   SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SignUp())),
+                    onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SignIn())),
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,
                       height: 55,
@@ -124,7 +141,7 @@ class _SignInState extends State<SignIn> {
                       ),
                       child: Center(
                         child: Text(
-                          'Create Account',
+                          'Login',
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontFamily: 'Quicksand-Bold',
