@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/get_started.dart';
-import 'package:know_your_medic/AuthPages/sign_in.dart';
 
 void main() {
   runApp(MyApp());

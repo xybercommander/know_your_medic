@@ -120,7 +120,7 @@ class _SignInState extends State<SignIn> {
                   GestureDetector(
                     onTap: () => Navigator.pushReplacement(context, PageTransition(
                         child: SignUp(),
-                        type: PageTransitionType.rightToLeftWithFade
+                        type: PageTransitionType.fade
                     )),
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,

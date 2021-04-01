@@ -41,6 +41,34 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/noImg.png'),
+                  backgroundColor: Colors.transparent,
+                  radius: 50,
+                ),
+                // ignore: deprecated_member_use
+                FlatButton(
+                  // TODO: Implement pickImage package
+                  onPressed: () => print('adding image'),
+                  child: Text(
+                    'Add Image',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,                             
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  color: Theme.of(context).primaryColor,
+                  height: 40,
+                  minWidth: 80,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                ),
+              ],
+            ),
             Form(
               key: _formKey,
               child: Column(
@@ -112,20 +140,26 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   SizedBox(height: 40,),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 40,
-                    height: 55,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Quicksand-Bold',
-                          fontSize: 24
+                  Hero(
+                    tag: 'button-red',
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 40,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                      child: Center(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Quicksand-Bold',
+                              fontSize: 24
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -134,7 +168,7 @@ class _SignUpState extends State<SignUp> {
                   GestureDetector(
                     onTap: () => Navigator.pushReplacement(context, PageTransition(
                         child: SignIn(),
-                        type: PageTransitionType.leftToRightWithFade
+                        type: PageTransitionType.fade
                     )),
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,

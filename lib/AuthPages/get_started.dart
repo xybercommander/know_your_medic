@@ -2,8 +2,6 @@ import 'dart:math';
 import 'package:clippy_flutter/paralellogram.dart';
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
-import 'package:know_your_medic/AuthPages/sign_up.dart';
-import 'package:know_your_medic/home_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class GetStarted extends StatefulWidget {
@@ -80,6 +78,7 @@ class _GetStartedState extends State<GetStarted> {
                   SizedBox(height: 20,),
                   Hero(
                     tag: 'button-red',
+                    // ignore: deprecated_member_use
                     child: FlatButton(
                       onPressed: () => Navigator.push(context, PageTransition(
                         child: SignIn(),
