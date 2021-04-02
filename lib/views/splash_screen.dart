@@ -30,7 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     getLogState();
 
-    //TODO CONTINUE FROM HERE
     Future.delayed(Duration(seconds: 4), () async {
       if(isLoggedIn) {
         UserConstants.email = await SharedPref.getEmailInSharedPreference();
