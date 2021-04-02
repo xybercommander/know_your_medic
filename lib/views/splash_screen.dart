@@ -35,8 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if(isLoggedIn) {
         UserConstants.email = await SharedPref.getEmailInSharedPreference();
         UserConstants.name = await SharedPref.getNameInSharedPreference();
-        String imgPath = await SharedPref.getImgInSharedPreference();
-        UserConstants.userImg = File(imgPath);
+        UserConstants.imgUrl = await SharedPref.getImgInSharedPreference();        
       }
 
       Navigator.pushReplacement(context, PageTransition(

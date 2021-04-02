@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
 import 'package:know_your_medic/helper/shared_preferences.dart';
@@ -24,19 +25,18 @@ class _HomePageState extends State<HomePage> {
       });
   }
 
-  // ----------GETTING DATA FROM SHARED PREFERENCES---------- //
-  setCredentials() async {
-    
-    String imgPath = await SharedPref.getImgInSharedPreference();
-    print('IMG PATH -------------> $imgPath');
-    if(imgPath != null) UserConstants.userImg = File(imgPath);
-  }
+  // // ----------GETTING DATA FROM SHARED PREFERENCES---------- //
+  // setCredentials() async {
+  //   String imgPath = await SharedPref.getImgInSharedPreference();
+  //   print('IMG PATH -------------> $imgPath');
+  //   if(imgPath != null) UserConstants.imgUrl = imgPath;
+  // }
 
-  @override
-  void initState() {
-    setCredentials();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   setCredentials();
+  //   super.initState();
+  // }
 
 
   @override
@@ -49,9 +49,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              backgroundImage: UserConstants.userImg == null ?
+              backgroundImage: UserConstants.imgUrl == null ?
                   AssetImage('assets/images/noImg.png') :
-                  FileImage(UserConstants.userImg),
+                  CachedNetworkImageProvider(UserConstants.imgUrl),
                   backgroundColor: Colors.transparent,
                   radius: 70,
             ),

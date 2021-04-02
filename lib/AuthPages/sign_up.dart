@@ -40,18 +40,19 @@ class _SignUpState extends State<SignUp> {
       Map<String, dynamic> userInfo = {
         'name': _nameTextEditingController.text,
         'email': _emailTextEditingController.text,
+        'imgUrl': imgUrl != null ? imgUrl : ''
       };
 
       SharedPref.saveNameSharedPreference(_nameTextEditingController.text);
       SharedPref.saveEmailSharedPreference(_emailTextEditingController.text);
-      if(_image != null) SharedPref.saveImgSharedPreference(_image.path.toString());
-      SharedPref.saveLoggedInSharedPreference(true);      
+      SharedPref.saveImgSharedPreference(imgUrl);
+      SharedPref.saveLoggedInSharedPreference(true);          
 
       authMethods.signUpWithEmailAndPassword(_emailTextEditingController.text, _passwordTextEditingController.text)
         .then((_) {
           UserConstants.email = _emailTextEditingController.text;
-          UserConstants.name = _nameTextEditingController.text;
-          UserConstants.userImg = _image;
+          UserConstants.name = _nameTextEditingController.text;   
+          UserConstants.imgUrl = imgUrl;       
 
           databaseMethods.uploadUserInfo(userInfo);
 

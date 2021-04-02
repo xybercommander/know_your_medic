@@ -15,6 +15,20 @@ class AuthChecker extends StatefulWidget {
 
 class _AuthCheckerState extends State<AuthChecker> {
   DocumentSnapshot documentSnapshot;
+  Stream userStream;
+
+  onLogin() {
+    setState(() {
+      userStream = widget.userStream;
+    });
+    print('USERSTREAM ----------> $userStream');
+  }
+
+  @override
+  void initState() {
+    onLogin();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +36,21 @@ class _AuthCheckerState extends State<AuthChecker> {
       body: StreamBuilder(
         stream: widget.userStream,
         builder: (context, snapshot) {
-          if(snapshot.hasData) documentSnapshot = snapshot.data.docs[0];
+          // if (snapshot.hasData)
+          //   print('DATA IS THERE BRUV');
+          // else
+          //   print('NO DATA BRUV');
+          if(snapshot.hasData) documentSnapshot = snapshot.data.docs[0];          
 
           Future.delayed(Duration(seconds: 5), () {
             UserConstants.email = documentSnapshot['email'];
             UserConstants.name = documentSnapshot['name'];
+            UserConstants.imgUrl = documentSnapshot['imgUrl'];
 
             SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
             SharedPref.saveNameSharedPreference(documentSnapshot['name']);
+            SharedPref.saveImgSharedPreference(documentSnapshot['imgUrl']);
+            SharedPref.saveLoggedInSharedPreference(true); 
 
             Navigator.pushReplacement(context, PageTransition(child: HomePage(), type: PageTransitionType.fade));
           });

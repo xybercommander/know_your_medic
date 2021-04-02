@@ -24,7 +24,7 @@ class _SignInState extends State<SignIn> {
   DatabaseMethods databaseMethods = DatabaseMethods();
 
   onLogin() async {
-    userStream = await databaseMethods.getUserInfoByEmail(_emailTextEditingController.text);
+    userStream = await databaseMethods.getUserInfoByEmail(_emailTextEditingController.text);    
   }
 
 
