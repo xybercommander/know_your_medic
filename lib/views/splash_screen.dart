@@ -7,6 +7,7 @@ import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/views/StaffPages/staff_home_page.dart';
 import 'package:know_your_medic/views/UserPages/user_home_page.dart';
 import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
+import 'package:know_your_medic/views/user_navigator.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -56,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ? GetStarted() 
         : isStaff 
             ? StaffHomePage() 
-            : UserProfilePage(),
+            : UserNavigator(),
         type: PageTransitionType.fade,
         duration: Duration(milliseconds: 400)
       ));

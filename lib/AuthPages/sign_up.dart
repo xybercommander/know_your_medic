@@ -10,6 +10,7 @@ import 'package:know_your_medic/views/UserPages/user_home_page.dart';
 import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/services/auth.dart';
 import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
+import 'package:know_your_medic/views/user_navigator.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignUp extends StatefulWidget {
@@ -60,7 +61,7 @@ class _SignUpState extends State<SignUp> {
           databaseMethods.uploadUserInfo(userInfo);
 
           Navigator.pushReplacement(context, PageTransition(
-            child: UserProfilePage(),
+            child: UserNavigator(),
             type: PageTransitionType.rightToLeftWithFade
           ));
         });
