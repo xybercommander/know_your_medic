@@ -5,6 +5,7 @@ class SharedPref {
   static String nameSharedPreferenceKey = 'NAMEKEY';
   static String emailSharedPreferenceKey = 'EMAILKEY';
   static String imgSharedPreferenceKey = 'IMGKEY';
+  static String isStaffSharedPreferenceKey = 'ISSTAFFKEY';
 
   // ----------------SET METHODS---------------- //
   static Future<void> saveLoggedInSharedPreference(bool isUserLoggedIn) async {
@@ -24,7 +25,12 @@ class SharedPref {
 
   static Future<void> saveImgSharedPreference(String imagePath) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return await preferences.setString(nameSharedPreferenceKey, imagePath);
+    return await preferences.setString(imgSharedPreferenceKey, imagePath);
+  }
+
+  static Future<void> saveIsStaffSharedPreference(bool isStaff) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setBool(isStaffSharedPreferenceKey, isStaff);
   }
 
 
@@ -47,6 +53,11 @@ class SharedPref {
   static Future<String> getEmailInSharedPreference() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(emailSharedPreferenceKey);
+  }
+
+  static Future<bool> getIsStaffInSharedPreference() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getBool(isStaffSharedPreferenceKey);
   }
 
 }

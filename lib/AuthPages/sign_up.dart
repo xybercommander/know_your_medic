@@ -6,9 +6,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
 import 'package:know_your_medic/helper/shared_preferences.dart';
 import 'package:know_your_medic/services/database.dart';
-import 'package:know_your_medic/views/home_page.dart';
+import 'package:know_your_medic/views/UserPages/user_home_page.dart';
 import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/services/auth.dart';
+import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignUp extends StatefulWidget {
@@ -40,13 +41,15 @@ class _SignUpState extends State<SignUp> {
       Map<String, dynamic> userInfo = {
         'name': _nameTextEditingController.text,
         'email': _emailTextEditingController.text,
-        'imgUrl': imgUrl != null ? imgUrl : ''
+        'imgUrl': imgUrl != null ? imgUrl : '',
+        'staff': false
       };
 
       SharedPref.saveNameSharedPreference(_nameTextEditingController.text);
       SharedPref.saveEmailSharedPreference(_emailTextEditingController.text);
       SharedPref.saveImgSharedPreference(imgUrl);
-      SharedPref.saveLoggedInSharedPreference(true);          
+      SharedPref.saveLoggedInSharedPreference(true); 
+      SharedPref.saveIsStaffSharedPreference(false);         
 
       authMethods.signUpWithEmailAndPassword(_emailTextEditingController.text, _passwordTextEditingController.text)
         .then((_) {
@@ -57,7 +60,7 @@ class _SignUpState extends State<SignUp> {
           databaseMethods.uploadUserInfo(userInfo);
 
           Navigator.pushReplacement(context, PageTransition(
-            child: HomePage(isLoggedIn: true,),
+            child: UserProfilePage(),
             type: PageTransitionType.rightToLeftWithFade
           ));
         });

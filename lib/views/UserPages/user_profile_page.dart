@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
@@ -7,15 +6,12 @@ import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/services/auth.dart';
 import 'package:page_transition/page_transition.dart';
 
-class HomePage extends StatefulWidget {
-  final bool isLoggedIn;
-  HomePage({this.isLoggedIn});
-
+class UserProfilePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _UserProfilePageState createState() => _UserProfilePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _UserProfilePageState extends State<UserProfilePage> {
   AuthMethods authMethods = AuthMethods();
 
   _logout() {
@@ -24,20 +20,6 @@ class _HomePageState extends State<HomePage> {
         Navigator.pushReplacement(context, PageTransition(child: SignIn(), type: PageTransitionType.fade));
       });
   }
-
-  // // ----------GETTING DATA FROM SHARED PREFERENCES---------- //
-  // setCredentials() async {
-  //   String imgPath = await SharedPref.getImgInSharedPreference();
-  //   print('IMG PATH -------------> $imgPath');
-  //   if(imgPath != null) UserConstants.imgUrl = imgPath;
-  // }
-
-  // @override
-  // void initState() {
-  //   setCredentials();
-  //   super.initState();
-  // }
-
 
   @override
   Widget build(BuildContext context) {
