@@ -13,15 +13,14 @@ class _UserSymptomsPageState extends State<UserSymptomsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(      
-      body: Center(
-        child: IconButton(
-          icon: Icon(Icons.info),
-          onPressed: () {
-            for(int i = 0; i < Symptoms.symptoms.length; i++) {
-              print(Symptoms.symptoms[i]);
-            }
-          },
-        ),
+      body: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        itemCount: Symptoms.symptoms.length,
+        itemBuilder: (context, index) {
+          return ListTile(          
+            title: Text(Symptoms.symptoms[index]['Name']),
+          );
+        },
       )
     );
   }
