@@ -16,8 +16,10 @@ class _UserSymptomsPageState extends State<UserSymptomsPage> {
       body: Center(
         child: IconButton(
           icon: Icon(Icons.info),
-          onPressed: () async {
-            print(Symptoms.symptoms);
+          onPressed: () {
+            for(int i = 0; i < Symptoms.symptoms.length; i++) {
+              print(Symptoms.symptoms[i]);
+            }
           },
         ),
       )

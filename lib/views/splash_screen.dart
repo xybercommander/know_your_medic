@@ -24,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   saveSymptomsList() async {
     await MedicApi().callSymptomsData();
+    print('called function');
   }
 
   getLogAndStaffState() async {
@@ -48,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     getLogAndStaffState();
+    saveSymptomsList();
 
     Future.delayed(Duration(seconds: 4), () async {
       if(isLoggedIn && isStaff == false) {
