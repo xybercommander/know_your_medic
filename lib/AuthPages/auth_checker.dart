@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/helper/shared_preferences.dart';
+import 'package:know_your_medic/modules/staff_constants.dart';
 import 'package:know_your_medic/modules/user_constants.dart';
+import 'package:know_your_medic/views/StaffPages/staff_home_page.dart';
 import 'package:know_your_medic/views/UserPages/user_home_page.dart';
+import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AuthChecker extends StatefulWidget {
@@ -40,20 +43,45 @@ class _AuthCheckerState extends State<AuthChecker> {
           //   print('DATA IS THERE BRUV');
           // else
           //   print('NO DATA BRUV');
-          if(snapshot.hasData) documentSnapshot = snapshot.data.docs[0];          
+          if(snapshot.hasData) documentSnapshot = snapshot.data.docs[0]; 
 
-          Future.delayed(Duration(seconds: 5), () {
-            UserConstants.email = documentSnapshot['email'];
-            UserConstants.name = documentSnapshot['name'];
-            UserConstants.imgUrl = documentSnapshot['imgUrl'];
+          // TODO: Start from here
+          print('----------DETAILS----------');
+          print('${documentSnapshot['staff']}');
+          print('${documentSnapshot['name']}');
+          print('${documentSnapshot['email']}');          
 
-            SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
-            SharedPref.saveNameSharedPreference(documentSnapshot['name']);
-            SharedPref.saveImgSharedPreference(documentSnapshot['imgUrl']);
-            SharedPref.saveLoggedInSharedPreference(true); 
+          // Future.delayed(Duration(seconds: 5), () {
+          //   if(documentSnapshot['staff'] == false) {
+          //     UserConstants.email = documentSnapshot['email'];
+          //     UserConstants.name = documentSnapshot['name'];
+          //     UserConstants.imgUrl = documentSnapshot['imgUrl'];
 
-            Navigator.pushReplacement(context, PageTransition(child: HomePage(), type: PageTransitionType.fade));
-          });
+          //     SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
+          //     SharedPref.saveNameSharedPreference(documentSnapshot['name']);
+          //     SharedPref.saveImgSharedPreference(documentSnapshot['imgUrl']);
+          //     SharedPref.saveLoggedInSharedPreference(true); 
+          //     SharedPref.saveIsStaffSharedPreference(false);
+
+          //     Navigator.pushReplacement(context, PageTransition(
+          //       child: UserProfilePage(), 
+          //       type: PageTransitionType.fade
+          //     ));
+          //   } else {
+          //     StaffConstants.name = documentSnapshot['name'];
+          //     StaffConstants.email = documentSnapshot['email'];
+
+          //     SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
+          //     SharedPref.saveNameSharedPreference(documentSnapshot['name']);
+          //     SharedPref.saveLoggedInSharedPreference(true); 
+          //     SharedPref.saveIsStaffSharedPreference(true);
+
+          //     Navigator.pushReplacement(context, PageTransition(
+          //       child: StaffHomePage(), 
+          //       type: PageTransitionType.fade
+          //     ));
+          //   }
+          // });
 
           return Center(
             child: CircularProgressIndicator(),
