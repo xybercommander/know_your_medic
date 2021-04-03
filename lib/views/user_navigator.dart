@@ -13,6 +13,21 @@ class _UserNavigatorState extends State<UserNavigator> {
   List<Widget> pages = [UserHomePage(), UserProfilePage()];
   int _selectedIndex = 0;
 
+
+  setAppBarTitle(int index) {
+    if (index == 0) return Text('Symptoms', style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontFamily: 'Quicksand-Bold',
+            fontSize: 24
+          ),);
+    if (index == 1) return Text('Issues', style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontFamily: 'Quicksand-Bold',
+            fontSize: 24
+          ),);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +35,7 @@ class _UserNavigatorState extends State<UserNavigator> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          'Appbar',
-          style: TextStyle(
-            color: Theme.of(context).primaryColor,
-            fontFamily: 'Quicksand-Bold',
-            fontSize: 24
-          ),
-        ),
+        title: setAppBarTitle(_selectedIndex)
       ),
 
       body: PageView(
@@ -40,6 +48,34 @@ class _UserNavigatorState extends State<UserNavigator> {
           });
         },
         children: pages,
+      ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          setState(() {
+            _selectedIndex = value;
+            pageController.animateToPage(_selectedIndex,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.linearToEaseOut);
+          });
+        },
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.healing,
+                color: _selectedIndex == 0
+                    ? Color.fromRGBO(255, 153, 102, 1)
+                    : Colors.grey[400]),
+            title: Container(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info,
+                color: _selectedIndex == 1
+                    ? Color.fromRGBO(255, 153, 102, 1)
+                    : Colors.grey[400]),
+            title: Container(),
+          ),
+        ],
       ),
     );
   }
