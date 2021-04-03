@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:know_your_medic/modules/symptoms_module.dart';
 import 'package:know_your_medic/services/api.dart';
 
 class UserSymptomsPage extends StatefulWidget {
@@ -15,8 +16,8 @@ class _UserSymptomsPageState extends State<UserSymptomsPage> {
       body: Center(
         child: IconButton(
           icon: Icon(Icons.info),
-          onPressed: () {
-            medicApi.callSymptomsData();
+          onPressed: () async {
+            print(Symptoms.symptoms);
           },
         ),
       )
