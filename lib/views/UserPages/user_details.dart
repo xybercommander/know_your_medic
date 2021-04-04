@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/services/api.dart';
+import 'package:know_your_medic/views/UserPages/diagnosis.dart';
+import 'package:page_transition/page_transition.dart';
 
 class UserDetails extends StatefulWidget {
   final List symptoms;
@@ -42,8 +44,13 @@ class _UserDetailsState extends State<UserDetails> {
               padding: const EdgeInsets.symmetric(vertical: 60),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(widget.symptoms.toString(), style: TextStyle(fontSize: 20),),
+                  Text(
+                    widget.symptoms.toString().substring(1, widget.symptoms.toString().length - 1), 
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, fontFamily: 'Quicksand-Bold'),
+                  ),
                   Text('Please enter the following details : ', style: TextStyle(fontSize: 20)),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 32,),
@@ -81,11 +88,27 @@ class _UserDetailsState extends State<UserDetails> {
                       Text('Female'),
                     ],
                   ),
-                  IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {                  
-                      MedicApi().callIssueData(widget.symptoms_ID, ageTypeConverter(), _radioValue);
-                    },
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(50)
+                    ),
+                    child: IconButton(
+                      icon: Icon(Icons.check, color: Colors.white,),
+                      onPressed: () async {
+                        await MedicApi().callIssueData(widget.symptoms_ID, ageTypeConverter(), _radioValue);
+
+                        Navigator.pushReplacement(
+                          context,
+                          PageTransition(
+                            child: DiagnosisPage(),
+                            type: PageTransitionType.rightToLeftWithFade
+                          )
+                        );
+                      },
+                    ),
                   )
                 ],
               ),
