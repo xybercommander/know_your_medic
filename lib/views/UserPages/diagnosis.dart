@@ -15,7 +15,7 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text('Diagnosis', style: TextStyle(
+        title: Text('Digital Diagnosis', style: TextStyle(
             color: Theme.of(context).primaryColor,
             fontFamily: 'Quicksand-Bold',
             fontSize: 24
@@ -82,9 +82,10 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           itemCount: Diagnosis.diagnosis[index]['Specialisation'].length,
-                          itemBuilder: (context, index) {
+                          itemBuilder: (context, listIndex) {
+                            //TODO: List View Bug Detected
                             return ListTile(
-                              title: Text(Diagnosis.diagnosis[index]['Specialisation'][index]['Name']),
+                              title: Text(Diagnosis.diagnosis[index]['Specialisation'][listIndex]['Name']),
                             );
                           },
                         ),
