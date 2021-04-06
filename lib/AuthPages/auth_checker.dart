@@ -46,42 +46,38 @@ class _AuthCheckerState extends State<AuthChecker> {
           //   print('NO DATA BRUV');
           if(snapshot.hasData) documentSnapshot = snapshot.data.docs[0]; 
           
-          print('----------DETAILS----------');
-          // print('${documentSnapshot['staff']}');
-          print('${documentSnapshot['name']}');
-          print('${documentSnapshot['email']}');          
+          if(snapshot.hasData) print('LENGTH --------> ${snapshot.data.docs.length}');         
 
           Future.delayed(Duration(seconds: 5), () {
-            // if(documentSnapshot['staff'] == false) {
-              
-            // } else {
-            //   StaffConstants.name = documentSnapshot['name'];
-            //   StaffConstants.email = documentSnapshot['email'];
+            if(documentSnapshot['staff'] == false) {
+              UserConstants.email = documentSnapshot['email'];
+              UserConstants.name = documentSnapshot['name'];
+              UserConstants.imgUrl = documentSnapshot['imgUrl'];
 
-            //   SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
-            //   SharedPref.saveNameSharedPreference(documentSnapshot['name']);
-            //   SharedPref.saveLoggedInSharedPreference(true); 
-            //   SharedPref.saveIsStaffSharedPreference(true);
+              SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
+              SharedPref.saveNameSharedPreference(documentSnapshot['name']);
+              SharedPref.saveImgSharedPreference(documentSnapshot['imgUrl']);
+              SharedPref.saveLoggedInSharedPreference(true); 
+              SharedPref.saveIsStaffSharedPreference(false);  
 
-            //   Navigator.pushReplacement(context, PageTransition(
-            //     child: StaffHomePage(), 
-            //     type: PageTransitionType.fade
-            //   ));
-            // }
-            UserConstants.email = documentSnapshot['email'];
-            UserConstants.name = documentSnapshot['name'];
-            UserConstants.imgUrl = documentSnapshot['imgUrl'];
+              Navigator.pushReplacement(context, PageTransition(
+                child: UserNavigator(), 
+                type: PageTransitionType.fade
+              ));
+            } else {
+              StaffConstants.name = documentSnapshot['name'];
+              StaffConstants.email = documentSnapshot['email'];
 
-            SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
-            SharedPref.saveNameSharedPreference(documentSnapshot['name']);
-            SharedPref.saveImgSharedPreference(documentSnapshot['imgUrl']);
-            SharedPref.saveLoggedInSharedPreference(true); 
-            SharedPref.saveIsStaffSharedPreference(false);
+              SharedPref.saveEmailSharedPreference(documentSnapshot['email']);
+              SharedPref.saveNameSharedPreference(documentSnapshot['name']);
+              SharedPref.saveLoggedInSharedPreference(true); 
+              SharedPref.saveIsStaffSharedPreference(true);
 
-            Navigator.pushReplacement(context, PageTransition(
-              child: UserNavigator(), 
-              type: PageTransitionType.fade
-            ));
+              Navigator.pushReplacement(context, PageTransition(
+                child: StaffHomePage(), 
+                type: PageTransitionType.fade
+              ));
+            }            
           });
 
           return Center(
