@@ -12,6 +12,17 @@ class _StaffListState extends State<StaffList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text('Consult Medical Experts', style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontFamily: 'Quicksand-Bold',
+            fontSize: 24
+          ),),
+      ),
+
       body: StreamBuilder(
         stream: databaseMethods.searchStaff(),
         builder: (context, snapshot) {
@@ -22,10 +33,21 @@ class _StaffListState extends State<StaffList> {
           }
 
           return ListView.builder(
+            physics: BouncingScrollPhysics(),
             itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(snapshot.data.docs[index]['name']),
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Image.asset('assets/images/noImg.png'),
+                      title: Text(snapshot.data.docs[index]['name']),
+                      trailing: Icon(Icons.chat),
+                    ),
+                    Divider()
+                  ],
+                ),
               );
             },
           );
