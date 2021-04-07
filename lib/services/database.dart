@@ -15,5 +15,12 @@ class DatabaseMethods {
       .snapshots();
   }
 
+  // -----------METHOD TO PRINT GET THE LIST OF STAFF----------- //
+  searchStaff() {
+    return FirebaseFirestore.instance.collection('users')
+      .where('staff', isEqualTo: true)
+      .snapshots();
+  }
+
 
 }

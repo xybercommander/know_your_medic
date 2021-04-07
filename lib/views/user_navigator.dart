@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:know_your_medic/views/Chat/staff_list.dart';
 import 'package:know_your_medic/views/UserPages/user_symptoms_page.dart';
 import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
+import 'package:page_transition/page_transition.dart';
 
 class UserNavigator extends StatefulWidget {
   @override
@@ -34,7 +36,30 @@ class _UserNavigatorState extends State<UserNavigator> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: setAppBarTitle(_selectedIndex)
+        title: setAppBarTitle(_selectedIndex),
+        actions: [
+          Icon(Icons.chat, color: Theme.of(context).primaryColor,),
+          SizedBox(width: 10,),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, PageTransition(
+                child: StaffList(),
+                type: PageTransitionType.rightToLeftWithFade
+              ));
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(Icons.chat_bubble_outline_outlined, color: Theme.of(context).primaryColor,),
+                Positioned(
+                  top: 18,
+                  child: Icon(Icons.add, size: 16, color: Theme.of(context).primaryColor,)
+                ),
+              ],          
+            ),
+          ),
+          SizedBox(width: 10,),
+        ],
       ),
 
       body: PageView(
