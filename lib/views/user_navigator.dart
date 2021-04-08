@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:know_your_medic/views/Chat/chatroomlist.dart';
 import 'package:know_your_medic/views/Chat/staff_list.dart';
 import 'package:know_your_medic/views/UserPages/user_symptoms_page.dart';
 import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
@@ -38,7 +39,13 @@ class _UserNavigatorState extends State<UserNavigator> {
         centerTitle: true,
         title: setAppBarTitle(_selectedIndex),
         actions: [
-          Icon(Icons.chat, color: Theme.of(context).primaryColor,),
+          GestureDetector(
+            onTap: () => Navigator.push(context, PageTransition(
+                    child: ChatRoomList(),
+                    type: PageTransitionType.fade
+                  )),
+            child: Icon(Icons.chat, color: Theme.of(context).primaryColor,)
+          ),
           SizedBox(width: 10,),
           GestureDetector(
             onTap: () {
@@ -90,6 +97,7 @@ class _UserNavigatorState extends State<UserNavigator> {
                 color: _selectedIndex == 0
                     ? Theme.of(context).primaryColor
                     : Colors.grey[400]),
+            // ignore: deprecated_member_use
             title: Container(),
           ),
           BottomNavigationBarItem(
@@ -97,6 +105,7 @@ class _UserNavigatorState extends State<UserNavigator> {
                 color: _selectedIndex == 1
                     ? Theme.of(context).primaryColor
                     : Colors.grey[400]),
+            // ignore: deprecated_member_use
             title: Container(),
           ),
         ],

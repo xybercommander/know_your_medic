@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:know_your_medic/modules/diagnosis_module.dart';
 import 'package:know_your_medic/modules/symptoms_module.dart';

@@ -9,9 +9,12 @@ class UserSymptomsPage extends StatefulWidget {
 }
 
 class _UserSymptomsPageState extends State<UserSymptomsPage> {
+  // ignore: non_constant_identifier_names
   int symptoms_selected = 0;
   List<String> symptoms = [];
+  // ignore: non_constant_identifier_names
   List<int> symptoms_ID = [];
+  // ignore: non_constant_identifier_names
   List<int> selected_symptoms_index = [];
 
   @override

@@ -1,14 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:know_your_medic/AuthPages/get_started.dart';
 import 'package:know_your_medic/helper/shared_preferences.dart';
 import 'package:know_your_medic/modules/staff_constants.dart';
-import 'package:know_your_medic/modules/symptoms_module.dart';
 import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/services/api.dart';
 import 'package:know_your_medic/views/StaffPages/staff_home_page.dart';
-import 'package:know_your_medic/views/UserPages/user_symptoms_page.dart';
-import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
 import 'package:know_your_medic/views/user_navigator.dart';
 import 'package:page_transition/page_transition.dart';
 

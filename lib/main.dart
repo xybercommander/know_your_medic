@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:know_your_medic/AuthPages/get_started.dart';
 import 'package:know_your_medic/views/splash_screen.dart';
 
 void main() async {

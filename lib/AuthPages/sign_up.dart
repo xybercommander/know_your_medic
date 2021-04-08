@@ -6,10 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:know_your_medic/AuthPages/sign_in.dart';
 import 'package:know_your_medic/helper/shared_preferences.dart';
 import 'package:know_your_medic/services/database.dart';
-import 'package:know_your_medic/views/UserPages/user_symptoms_page.dart';
 import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/services/auth.dart';
-import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
 import 'package:know_your_medic/views/user_navigator.dart';
 import 'package:page_transition/page_transition.dart';
 

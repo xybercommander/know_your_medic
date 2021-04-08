@@ -82,8 +82,7 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           itemCount: Diagnosis.diagnosis[index]['Specialisation'].length,
-                          itemBuilder: (context, listIndex) {
-                            //TODO: List View Bug Detected
+                          itemBuilder: (context, listIndex) {                        
                             return ListTile(
                               title: Text(Diagnosis.diagnosis[index]['Specialisation'][listIndex]['Name']),
                             );

@@ -11,7 +11,7 @@ class DatabaseMethods {
 
   // ---------SIGN IN INFO GET METHOD--------- //
   Future<Stream<QuerySnapshot>> getUserInfoByEmail(String userEmail) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
       .collection('users')
       .where('email', isEqualTo: userEmail)
       .snapshots();
@@ -81,5 +81,5 @@ class DatabaseMethods {
       .snapshots();
   }
 
-  
+
 }

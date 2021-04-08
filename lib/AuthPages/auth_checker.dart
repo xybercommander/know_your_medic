@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:know_your_medic/helper/shared_preferences.dart';
 import 'package:know_your_medic/modules/staff_constants.dart';
 import 'package:know_your_medic/modules/user_constants.dart';
+import 'package:know_your_medic/views/Chat/chatroomlist.dart';
 import 'package:know_your_medic/views/StaffPages/staff_home_page.dart';
-import 'package:know_your_medic/views/UserPages/user_symptoms_page.dart';
-import 'package:know_your_medic/views/UserPages/user_profile_page.dart';
 import 'package:know_your_medic/views/user_navigator.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -73,8 +72,9 @@ class _AuthCheckerState extends State<AuthChecker> {
               SharedPref.saveLoggedInSharedPreference(true); 
               SharedPref.saveIsStaffSharedPreference(true);
 
+              // TODO: FIX CHATROOM FOR STAFF
               Navigator.pushReplacement(context, PageTransition(
-                child: StaffHomePage(), 
+                child: ChatRoomList(), 
                 type: PageTransitionType.fade
               ));
             }            
