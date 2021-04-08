@@ -4,7 +4,7 @@ import 'package:know_your_medic/helper/shared_preferences.dart';
 import 'package:know_your_medic/modules/staff_constants.dart';
 import 'package:know_your_medic/modules/user_constants.dart';
 import 'package:know_your_medic/services/api.dart';
-import 'package:know_your_medic/views/StaffPages/staff_home_page.dart';
+import 'package:know_your_medic/views/Chat/chatroomlist.dart';
 import 'package:know_your_medic/views/user_navigator.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: !isLoggedIn 
         ? GetStarted() 
         : isStaff 
-            ? StaffHomePage() 
+            ? ChatRoomList() 
             : UserNavigator(),
         type: PageTransitionType.fade,
         duration: Duration(milliseconds: 400)

@@ -20,7 +20,7 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
 
   getThisUserName() async {    
     names = widget.chatRoomId.split('_');
-    if(widget.isStaff) {
+    if(!widget.isStaff) {
       int i = names.indexOf(UserConstants.name);
       i == 0 ? name = names[1] : name = names[0];
     } else {
@@ -54,8 +54,8 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       colors: [                        
-                    Color.fromRGBO(223, 140, 112, 1),
-                    Color.fromRGBO(250, 89, 143, 1)
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).primaryColor.withOpacity(0.8),
                   ])),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,14 +71,16 @@ class _ChatRoomListTileState extends State<ChatRoomListTile> {
                 children: [            
                   Text(name, style: TextStyle(
                     color: Colors.white,
-                    fontSize: 25
+                    fontSize: 25,
+                    fontFamily: 'Quicksand-SemiBold'
                   ),),
                   Text(
                     widget.lastMessage.length > 30 ? widget.lastMessage.substring(0, 30) + '...' : widget.lastMessage, 
                     overflow: TextOverflow.ellipsis, 
                     style: TextStyle(
                     fontSize: 13,
-                    color: Colors.white54
+                    color: Colors.white54,
+                    fontFamily: 'Quicksand-SemiBold'
                   ),)
                 ],
               ),

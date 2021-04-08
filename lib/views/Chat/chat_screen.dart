@@ -73,12 +73,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                  sendByMe ? Color.fromRGBO(223, 140, 112, 1) : Color.fromRGBO(194, 200, 197, 1),
-                  sendByMe ? Color.fromRGBO(250, 89, 143, 1) : Color.fromRGBO(221, 221, 218, 1),
+                  sendByMe ? Theme.of(context).primaryColor : Color.fromRGBO(194, 200, 197, 1),
+                  sendByMe ? Theme.of(context).primaryColor.withOpacity(0.7) : Color.fromRGBO(221, 221, 218, 1),
                 ])),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(text, style: TextStyle(color: sendByMe ? Colors.white : Colors.blueGrey[900]),),
+            child: Text(text, style: TextStyle(color: sendByMe ? Colors.white : Colors.blueGrey[900], fontFamily: 'Quicksand-SemiBold'),),
           ),
       ),
     );
@@ -165,9 +165,12 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.chatWithName),
-        backgroundColor: Color.fromRGBO(223, 140, 112, 1),        
+      appBar: AppBar(        
+        title: Text(widget.chatWithName, style: TextStyle(color: Theme.of(context).primaryColor, fontFamily: 'Quicksand-SemiBold'),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
       ),
 
       body: Container(
@@ -178,7 +181,7 @@ class _ChatScreenState extends State<ChatScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                color: Color.fromRGBO(255, 153, 102, 1),
+                color: Theme.of(context).primaryColor,
                 child: Row(
                   children: [
                     Expanded(
@@ -191,7 +194,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'type a message..',
-                          hintStyle: TextStyle(color: Colors.white54)
+                          hintStyle: TextStyle(color: Colors.white54, fontFamily: 'Quicksand-SemiBold')
                         ),
                       ),
                     ),
@@ -199,7 +202,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       onTap: () {
                         addMessage(true);
                       },
-                      child: Icon(Icons.send)
+                      child: Icon(Icons.send, color: Colors.white,)
                     )
                   ],
                 ),
