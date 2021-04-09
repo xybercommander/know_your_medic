@@ -1,4 +1,4 @@
-# know_your_medic
+# chat ui and implementation
 
 A new Flutter project.
 
