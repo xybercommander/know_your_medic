@@ -15,6 +15,7 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         title: Text('Digital Diagnosis', style: TextStyle(
             color: Theme.of(context).primaryColor,
             fontFamily: 'Quicksand-Bold',

@@ -57,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
         StaffConstants.email = await SharedPref.getEmailInSharedPreference();
       }
 
+      // TODO: Fix get started
       Navigator.pushReplacement(context, PageTransition(
         child: !isLoggedIn 
         ? GetStarted() 
