@@ -1,4 +1,4 @@
-# chat ui and implementation
+# Know Your Medic
 
 A new Flutter project.
 
